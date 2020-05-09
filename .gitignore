@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Server/Euromonitor.Server/.vs/Euromonitor.Server/v16
+/Server/Euromonitor.Server/Euromonitor.Server.IdentityServer/obj
