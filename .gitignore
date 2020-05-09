@@ -4,3 +4,10 @@
 
 /Server/Euromonitor.Server/.vs/Euromonitor.Server/v16
 /Server/Euromonitor.Server/Euromonitor.Server.IdentityServer/obj
+/Server/Euromonitor.Server/Euromonitor.Server.IdentityServer.Infrastructure/bin/Debug/netcoreapp3.1
+*.rsa
+/Server/Euromonitor.Server/.vs/Euromonitor.Server/DesignTimeBuild
+/Server/Euromonitor.Server/Euromonitor.Server.IdentityServer/bin/Debug/netcoreapp3.1
+/Server/Euromonitor.Server/Euromonitor.Server.IdentityServer/authserver_log.txt
+*.user
+/Server/Euromonitor.Server/Euromonitor.Server.IdentityServer.Infrastructure/obj
