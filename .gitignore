@@ -4,7 +4,7 @@
 
 *.rsa
 *.user
-/src/Server/.vs/Euromonitor.Server/v16
+/src/Server/.vs/
 /src/Server/Euromonitor.Server.Api/bin
 /src/Server/Euromonitor.Server.Api/obj
 /src/Server/Euromonitor.Server.Api/Properties/PublishProfiles
