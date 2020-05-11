@@ -16,3 +16,9 @@
 /src/Server/Euromonitor.Server.IdentityServer.Infrastructure/obj
 /src/Server/.vs/Euromonitor.Server/config
 /src/Server/Euromonitor.Server.Api/.config
+/src/Server/Euromonitor.Server.Interfaces/bin/Debug/netstandard2.0
+/src/Server/Euromonitor.Server.Interfaces/obj
+/src/Server/Euromonitor.Server.MongoDbProvider/bin/Debug/netstandard2.0
+/src/Server/Euromonitor.Server.MongoDbProvider/obj
+/src/Server/DbClientConsole/bin/Debug/netcoreapp3.1
+/src/Server/DbClientConsole/obj
