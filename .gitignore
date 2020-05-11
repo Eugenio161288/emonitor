@@ -22,3 +22,5 @@
 /src/Server/Euromonitor.Server.MongoDbProvider/obj
 /src/Server/DbClientConsole/bin/Debug/netcoreapp3.1
 /src/Server/DbClientConsole/obj
+/src/Server/tests/Euromonitor.Server.MongoDbProvider.Tests/bin/Debug/netcoreapp3.1
+/src/Server/tests/Euromonitor.Server.MongoDbProvider.Tests/obj
