@@ -13,13 +13,13 @@ namespace Euromonitor.Server.Api.Controllers
     [ApiController]
     public class SubscriptionController : ControllerBase
     {
-        private IDbProviderBuilder _dbProviderBuilder;
+        private IDbProviderBuilder _dbBuilder;
 
         private IConfiguration _configuration;
 
-        public SubscriptionController(IDbProviderBuilder dbBuilder, IConfiguration configuration)
+        public SubscriptionController(IDbProviderBuilder dbProviderBuilder, IConfiguration configuration)
         {
-            _dbProviderBuilder = dbBuilder;
+            _dbBuilder = dbProviderBuilder;
             _configuration = configuration;
         }
 
@@ -29,7 +29,7 @@ namespace Euromonitor.Server.Api.Controllers
             List<Book> result = null;
             var connectionString = _configuration["connectionString"];
 
-            var dbProvider = _dbProviderBuilder.SetConnectionString(connectionString)
+            var dbProvider = _dbBuilder.SetConnectionString(connectionString)
                                 .SetDatabase("emonitor_db")
                                 .SetCollection("users")
                                 .Build();
@@ -50,7 +50,7 @@ namespace Euromonitor.Server.Api.Controllers
         {
             var connectionString = _configuration["connectionString"];
 
-            var dbProvider = _dbProviderBuilder.SetConnectionString(connectionString)
+            var dbProvider = _dbBuilder.SetConnectionString(connectionString)
                                 .SetDatabase("emonitor_db")
                                 .SetCollection("books")
                                 .Build();
@@ -59,7 +59,6 @@ namespace Euromonitor.Server.Api.Controllers
             dbProvider.Collection = "users";
             // move to the helper
             var givenName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName);
-            //var claimJson = new JsonResult(User.Claims.Select(c => new { c.Type, c.Value }));
             var user = await dbProvider.FindRecord<User>("givenname", givenName.Value);
 
             //Console.WriteLine(User.Claims);
@@ -88,7 +87,7 @@ namespace Euromonitor.Server.Api.Controllers
         {
             var connectionString = _configuration["connectionString"];
 
-            var dbProvider = _dbProviderBuilder.SetConnectionString(connectionString)
+            var dbProvider = _dbBuilder.SetConnectionString(connectionString)
                                 .SetDatabase("emonitor_db")
                                 .SetCollection("books")
                                 .Build();

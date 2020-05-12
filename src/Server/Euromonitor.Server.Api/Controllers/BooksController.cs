@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Euromonitor.Server.Api.Controllers
@@ -20,9 +19,9 @@ namespace Euromonitor.Server.Api.Controllers
 
             var collection = db.GetCollection<Book>("books");
 
-            var books = collection.Find(new BsonDocument())
-                .Project<Book>(Builders<Book>.Projection.Exclude("_id"))
-                .ToList();
+            var books = await collection.Find(new BsonDocument())
+                .Project<Book>(Builders<Book>.Projection.Exclude("_id"))                                                                                                                                                                                        
+                .ToListAsync();
 
             return books;
 
