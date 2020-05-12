@@ -32,10 +32,20 @@ namespace Euromonitor.Server.Interfaces.Database
         Task InsertAsync<T>(T record);
 
         /// <summary>
+        /// Updates specified record in database asynchronously.
+        /// </summary>
+        /// <typeparam name="T">The type of the record.</typeparam>
+        /// <param name="record">The record value.</param>
+        /// <returns></returns>
+        Task UpdateAsync<T>(T record, string key, string value);
+
+        /// <summary>
         /// Shows all records from collection asynchronously.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         Task<List<T>> ShowAll<T>();
+
+        Task<T> FindRecord<T>(string key, string value);
     }
 }

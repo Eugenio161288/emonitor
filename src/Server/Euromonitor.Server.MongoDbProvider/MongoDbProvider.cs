@@ -1,7 +1,6 @@
 ﻿using Euromonitor.Server.Interfaces.Database;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -37,9 +36,10 @@ namespace Euromonitor.Server.MongoDbProvider
         /// <typeparam name="T">The type of the record.</typeparam>
         /// <param name="record">The record.</param>
         /// <returns></returns>
-        public Task InsertAsync<T>(T record)
+        public async Task InsertAsync<T>(T record)
         {
-            throw new NotImplementedException();
+            var collection = _db.GetCollection<T>(Collection);
+            await collection.InsertOneAsync(record);
         }
 
         /// <summary>
@@ -68,6 +68,32 @@ namespace Euromonitor.Server.MongoDbProvider
                 _client = new MongoClient(ConnectionString);
                 _db = _client.GetDatabase(Database);
             }
+        }
+
+        /// <summary>
+        /// Updates existing document in db collection.
+        /// </summary>
+        /// <typeparam name="T">The type of the document.</typeparam>
+        /// <param name="record">The document value.</param>
+        /// <returns></returns>
+        public async Task UpdateAsync<T>(T record, string key, string value)
+        {
+            var collection = _db.GetCollection<T>(Collection);
+            var filter = Builders<T>.Filter.Eq(key, value);
+
+            await collection.ReplaceOneAsync(filter, record);
+        }
+
+        public async Task<T> FindRecord<T>(string key, string value)
+        {
+            var filter = Builders<T>.Filter.Eq(key, value);
+            var collection = _db.GetCollection<T>(Collection);
+
+            var record = await collection.Find(filter)
+                .Project<T>(Builders<T>.Projection.Exclude("_id"))
+                .FirstOrDefaultAsync<T>();
+
+            return record;
         }
     }
 }
