@@ -42,6 +42,8 @@ namespace Euromonitor.Server.Api
 
             services.AddTransient<IDbProviderBuilder, MongoDbProviderBuilder>();
 
+            services.AddSwaggerDocument();
+
             services.AddMvc(options =>
             {
                 options.EnableEndpointRouting = false;
@@ -60,6 +62,9 @@ namespace Euromonitor.Server.Api
             app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseAuthentication();
+
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseMvc();
         }
