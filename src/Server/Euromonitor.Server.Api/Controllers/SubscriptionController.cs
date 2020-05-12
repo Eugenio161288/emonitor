@@ -104,7 +104,7 @@ namespace Euromonitor.Server.Api.Controllers
                                 .Build();
             var book = await dbProvider.FindRecord<Book>("isbn", model.Isbn);
 
-            dbProvider.Collection = "users";
+            dbProvider.Collection = _dbConfiguration.UsersCollection;
             var givenName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName);
             var user = await dbProvider.FindRecord<User>("givenname", givenName.Value);
 
