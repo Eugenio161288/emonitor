@@ -8,6 +8,13 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.0.0" />
+    <PackageReference Include="MongoDB.Bson" Version="2.10.4" />
+    <PackageReference Include="MongoDB.Driver" Version="2.10.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Euromonitor.Server.Interfaces\Euromonitor.Server.Interfaces.csproj" />
+    <ProjectReference Include="..\Euromonitor.Server.MongoDbProvider\Euromonitor.Server.MongoDbProvider.csproj" />
   </ItemGroup>
 
 </Project>
