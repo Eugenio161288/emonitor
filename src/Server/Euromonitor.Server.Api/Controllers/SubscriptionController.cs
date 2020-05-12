@@ -72,7 +72,7 @@ namespace Euromonitor.Server.Api.Controllers
             else
             {
                 // check if books is already subscribed
-                var existingBook = user.Books.Select(b => b.Name == book.Name).FirstOrDefault();
+                var existingBook = user.Books.Contains(book);
                 if(!existingBook)
                 {
                     user.Books.Add(book);
@@ -102,16 +102,16 @@ namespace Euromonitor.Server.Api.Controllers
 
             if(user != null && book != null)
             {
-                //// check if books is already subscribed
-                //var existingBook = user.Books.Select(b => b.Name == book.Name).FirstOrDefault();
-                //if(existingBook)
-                //{
-                //    user.Books.Remove(book);
-                //    await dbProvider.UpdateAsync<User>(user, "givenname", givenName.Value);
-                //}
+                // check if books is already subscribed
+                var existingBook = user.Books.Contains(book);
+                if (existingBook)
+                {
+                    user.Books.Remove(book);
+                    await dbProvider.UpdateAsync<User>(user, "givenname", givenName.Value);
+                }
 
-                user.Books.Remove(book);
-                await dbProvider.UpdateAsync<User>(user, "givenname", givenName.Value);
+                //user.Books.Remove(book);
+                //await dbProvider.UpdateAsync<User>(user, "givenname", givenName.Value);
             }
 
             return Ok();
