@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Euromonitor.Server.Interfaces\Euromonitor.Server.Interfaces.csproj" />
+    <ProjectReference Include="..\Euromonitor.Server.MongoDbProvider\Euromonitor.Server.MongoDbProvider.csproj" />
   </ItemGroup>
 
 </Project>
