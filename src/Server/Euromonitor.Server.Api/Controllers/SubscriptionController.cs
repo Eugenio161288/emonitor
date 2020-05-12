@@ -35,7 +35,7 @@ namespace Euromonitor.Server.Api.Controllers
                                 .Build();
 
             var givenName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName);
-            var user = await dbProvider.FindRecord<User>("firstName", givenName.Value);
+            var user = await dbProvider.FindRecord<User>("givenname", givenName.Value);
             if (user != null && user.Books.Any())
             {
                 result = user.Books;
