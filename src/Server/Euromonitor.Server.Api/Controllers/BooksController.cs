@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Euromonitor.Server.Api.Controllers
 {
+    /// <summary>
+    /// Determines REST API methods for books.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class BooksController : ControllerBase
@@ -21,8 +24,12 @@ namespace Euromonitor.Server.Api.Controllers
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Shows all books.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public async Task<List<Book>> Show()
+        public async Task<List<Book>> ShowAll()
         {
             var connectionString = _configuration["connectionString"];
 

@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Euromonitor.Server.Api.Controllers
 {
+    /// <summary>
+    /// Determines REST API for user subscriptions.
+    /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class SubscriptionController : ControllerBase
@@ -24,8 +27,12 @@ namespace Euromonitor.Server.Api.Controllers
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Shows all books from user subscription.
+        /// </summary>
+        /// <returns>Returns list of the books from user subscription.</returns>
         [HttpGet]
-        public async Task<List<Book>> Books()
+        public async Task<List<Book>> UserBooks()
         {
             List<Book> result = null;
             var connectionString = _configuration["connectionString"];
@@ -46,6 +53,11 @@ namespace Euromonitor.Server.Api.Controllers
             return result;
         }
 
+        /// <summary>
+        /// Adds new book to the user subscription.
+        /// </summary>
+        /// <param name="model">Book's model to be added to the user subscription.</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AddBook([FromBody] BookRequestModel model)
         {
@@ -62,7 +74,6 @@ namespace Euromonitor.Server.Api.Controllers
             var givenName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName);
             var user = await dbProvider.FindRecord<User>("givenname", givenName.Value);
 
-            //Console.WriteLine(User.Claims);
             if (user == null)
             {
                 // move to the fabric
@@ -71,7 +82,6 @@ namespace Euromonitor.Server.Api.Controllers
             }
             else
             {
-                // check if books is already subscribed
                 var existingBook = user.Books.Contains(book);
                 if(!existingBook)
                 {
@@ -83,6 +93,11 @@ namespace Euromonitor.Server.Api.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Removes book from the user subscription.
+        /// </summary>
+        /// <param name="model">The book's model to be removed from user subscription.</param>
+        /// <returns></returns>
         [HttpDelete]
         public async Task<IActionResult> DeleteBook([FromBody] BookRequestModel model)
         {
@@ -97,21 +112,16 @@ namespace Euromonitor.Server.Api.Controllers
             dbProvider.Collection = "users";
             // move to the helper
             var givenName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName);
-            //var claimJson = new JsonResult(User.Claims.Select(c => new { c.Type, c.Value }));
             var user = await dbProvider.FindRecord<User>("givenname", givenName.Value);
 
             if(user != null && book != null)
             {
-                // check if books is already subscribed
                 var existingBook = user.Books.Contains(book);
                 if (existingBook)
                 {
                     user.Books.Remove(book);
                     await dbProvider.UpdateAsync<User>(user, "givenname", givenName.Value);
                 }
-
-                //user.Books.Remove(book);
-                //await dbProvider.UpdateAsync<User>(user, "givenname", givenName.Value);
             }
 
             return Ok();
