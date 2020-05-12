@@ -1,4 +1,5 @@
 ﻿using Euromonitor.Server.Api.Models;
+using Euromonitor.Server.Api.Models.Configuration;
 using Euromonitor.Server.Api.Models.Data;
 using Euromonitor.Server.Interfaces.Database;
 using Microsoft.AspNetCore.Mvc;
@@ -19,12 +20,12 @@ namespace Euromonitor.Server.Api.Controllers
     {
         private IDbProviderBuilder _dbBuilder;
 
-        private IConfiguration _configuration;
+        private DbConfiguration _dbConfiguration;
 
         public SubscriptionController(IDbProviderBuilder dbProviderBuilder, IConfiguration configuration)
         {
             _dbBuilder = dbProviderBuilder;
-            _configuration = configuration;
+            _dbConfiguration = configuration.GetSection("databaseSettings").Get<DbConfiguration>();
         }
 
         /// <summary>
@@ -35,11 +36,10 @@ namespace Euromonitor.Server.Api.Controllers
         public async Task<List<Book>> UserBooks()
         {
             List<Book> result = null;
-            var connectionString = _configuration["connectionString"];
 
-            var dbProvider = _dbBuilder.SetConnectionString(connectionString)
-                                .SetDatabase("emonitor_db")
-                                .SetCollection("users")
+            var dbProvider = _dbBuilder.SetConnectionString(_dbConfiguration.ConnectionString)
+                                .SetDatabase(_dbConfiguration.Database)
+                                .SetCollection(_dbConfiguration.UsersCollection)
                                 .Build();
 
             var givenName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName);
@@ -61,15 +61,13 @@ namespace Euromonitor.Server.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> AddBook([FromBody] BookRequestModel model)
         {
-            var connectionString = _configuration["connectionString"];
-
-            var dbProvider = _dbBuilder.SetConnectionString(connectionString)
-                                .SetDatabase("emonitor_db")
-                                .SetCollection("books")
+            var dbProvider = _dbBuilder.SetConnectionString(_dbConfiguration.ConnectionString)
+                                .SetDatabase(_dbConfiguration.Database)
+                                .SetCollection(_dbConfiguration.BooksCollection)
                                 .Build();
             var book = await dbProvider.FindRecord<Book>("isbn", model.Isbn);
 
-            dbProvider.Collection = "users";
+            dbProvider.Collection = _dbConfiguration.UsersCollection;
             var givenName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName);
             var user = await dbProvider.FindRecord<User>("givenname", givenName.Value);
 
@@ -100,11 +98,9 @@ namespace Euromonitor.Server.Api.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteBook([FromBody] BookRequestModel model)
         {
-            var connectionString = _configuration["connectionString"];
-
-            var dbProvider = _dbBuilder.SetConnectionString(connectionString)
-                                .SetDatabase("emonitor_db")
-                                .SetCollection("books")
+            var dbProvider = _dbBuilder.SetConnectionString(_dbConfiguration.ConnectionString)
+                                .SetDatabase(_dbConfiguration.Database)
+                                .SetCollection(_dbConfiguration.BooksCollection)
                                 .Build();
             var book = await dbProvider.FindRecord<Book>("isbn", model.Isbn);
 
