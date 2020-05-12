@@ -19,5 +19,10 @@
         /// The user's email.
         /// </summary>
         string Email { get; set; }
+
+        /// <summary>
+        /// User given name from authority.
+        /// </summary>
+        string GivenName { get; set; }
     }
 }

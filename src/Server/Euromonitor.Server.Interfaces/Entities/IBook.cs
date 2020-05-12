@@ -21,5 +21,15 @@ namespace Euromonitor.Server.Interfaces.Entities
         /// The purchase price of the book.
         /// </summary>
         Decimal PurchasePrice { get; set; }
+
+        /// <summary>
+        /// The URL of the cover.
+        /// </summary>
+        string CoverUrl { get; set; }
+
+        /// <summary>
+        /// ISBN of the book.
+        /// </summary>
+        string Isbn { get; set; }
     }
 }

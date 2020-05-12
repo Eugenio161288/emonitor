@@ -1,11 +1,13 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using Euromonitor.Server.Interfaces.Entities;
+using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Euromonitor.Server.Api.Models.Data
 {
-    public class User
+    /// <summary>
+    /// Represents user's properties like first name, last name, books etc.
+    /// </summary>
+    public class User : IUser
     {
         [BsonElement("firstName")]
         /// <summary>

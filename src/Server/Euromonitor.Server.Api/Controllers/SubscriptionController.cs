@@ -47,7 +47,7 @@ namespace Euromonitor.Server.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBook([FromBody] BookRequest model)
+        public async Task<IActionResult> AddBook([FromBody] BookRequestModel model)
         {
             var connectionString = _configuration["connectionString"];
 
@@ -55,7 +55,7 @@ namespace Euromonitor.Server.Api.Controllers
                                 .SetDatabase("emonitor_db")
                                 .SetCollection("books")
                                 .Build();
-            var book = await dbProvider.FindRecord<Book>("name", model.Name);
+            var book = await dbProvider.FindRecord<Book>("isbn", model.Isbn);
 
             dbProvider.Collection = "users";
             // move to the helper
@@ -84,7 +84,7 @@ namespace Euromonitor.Server.Api.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteBook([FromBody] BookRequest model)
+        public async Task<IActionResult> DeleteBook([FromBody] BookRequestModel model)
         {
             var connectionString = _configuration["connectionString"];
 
@@ -92,7 +92,7 @@ namespace Euromonitor.Server.Api.Controllers
                                 .SetDatabase("emonitor_db")
                                 .SetCollection("books")
                                 .Build();
-            var book = await dbProvider.FindRecord<Book>("name", model.Name);
+            var book = await dbProvider.FindRecord<Book>("isbn", model.Isbn);
 
             dbProvider.Collection = "users";
             // move to the helper
