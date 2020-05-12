@@ -1,4 +1,4 @@
-﻿using Euromonitor.Server.Api.Models;
+﻿using Euromonitor.Server.Api.Models.Data;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;

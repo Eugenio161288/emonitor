@@ -1,4 +1,5 @@
 ﻿using Euromonitor.Server.Api.Models;
+using Euromonitor.Server.Api.Models.Data;
 using Euromonitor.Server.Interfaces.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

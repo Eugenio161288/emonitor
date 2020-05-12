@@ -2,12 +2,11 @@
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 
-namespace Euromonitor.Server.Api.Models
+namespace Euromonitor.Server.Api.Models.Data
 {
     [Serializable]
     public class Book
     {
-        //[DataMemeber]
         [BsonElement("name")]
         public string Name { get; set; }
 
@@ -19,8 +18,6 @@ namespace Euromonitor.Server.Api.Models
 
         [BsonElement("coverUrl")]
         public string CoverUrl { get; set; }
-
-        //public bool IsSubscribed { get; set; }
 
         public override bool Equals(object obj)
         {

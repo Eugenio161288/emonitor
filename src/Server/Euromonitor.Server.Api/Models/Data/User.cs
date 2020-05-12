@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Euromonitor.Server.Api.Models
+namespace Euromonitor.Server.Api.Models.Data
 {
     public class User
     {
