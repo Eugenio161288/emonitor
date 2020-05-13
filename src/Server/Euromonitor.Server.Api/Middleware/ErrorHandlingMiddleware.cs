@@ -18,7 +18,12 @@ namespace Euromonitor.Server.Api.Middleware
             this.next = next;
         }
 
-        public async Task Invoke(HttpContext context /* other dependencies */)
+        /// <summary>
+        /// Invokes the task.
+        /// </summary>
+        /// <param name="context">HTTP context.</param>
+        /// <returns></returns>
+        public async Task Invoke(HttpContext context)
         {
             try
             {
