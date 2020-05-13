@@ -1,4 +1,5 @@
-﻿using Euromonitor.Server.Api.Models.Data;
+﻿using Euromonitor.Server.Api.Models.Configuration;
+using Euromonitor.Server.Api.Models.Data;
 using Euromonitor.Server.Interfaces.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -16,12 +17,12 @@ namespace Euromonitor.Server.Api.Controllers
     {
         private IDbProviderBuilder _dbBuilder;
 
-        private IConfiguration _configuration;
+        private DbConfiguration _dbConfiguration;
 
         public BooksController(IDbProviderBuilder dbProviderBuilder, IConfiguration configuration)
         {
             _dbBuilder = dbProviderBuilder;
-            _configuration = configuration;
+            _dbConfiguration = configuration.GetSection("databaseSettings").Get<DbConfiguration>();
         }
 
         /// <summary>
@@ -31,11 +32,9 @@ namespace Euromonitor.Server.Api.Controllers
         [HttpGet]
         public async Task<List<Book>> ShowAll()
         {
-            var connectionString = _configuration["connectionString"];
-
-            var dbProvider = _dbBuilder.SetConnectionString(connectionString)
-                                .SetDatabase("emonitor_db")
-                                .SetCollection("books")
+            var dbProvider = _dbBuilder.SetConnectionString(_dbConfiguration.ConnectionString)
+                                .SetDatabase(_dbConfiguration.Database)
+                                .SetCollection(_dbConfiguration.BooksCollection)
                                 .Build();
 
             var books = await dbProvider.ShowAll<Book>();
