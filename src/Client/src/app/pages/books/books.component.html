@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div *ngIf="!busy">
+      <h3>{{this.pagetitle}}</h3>
+      <div class="wrapper">
+        <div
+          *ngFor="let claim of claims; let i = index" [attr.data-index]="i"
+          [ngClass]="{'clickable' : pageType === 'books'}"
+          (click)="pageType === 'books' ? onBookClick(claim.name) : null"
+          class="book"
+        >
+          <h4>{{claim.name}}</h4>
+          <img src="{{claim.coverUrl}}" alt="cover" />
+          <p>{{claim.text}}</p>
+          <div class="controls">
+            <span>{{claim.purchasePrice}}</span>
+<!--            <button *ngIf="pageType === 'books'" (click)="onSubscribeClick(claim.name)">Subscribe!</button>-->
+            <button *ngIf="pageType === 'my-books'" (click)="onUnsubscribeClick(claim.name)">Unsubscribe!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ngx-spinner></ngx-spinner>
+</div>

@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div *ngIf="!busy">
+      <div class="wrapper">
+        <div class="book">
+          <h4>{{currentBook.name}}</h4>
+          <img src="{{currentBook.coverUrl}}" alt="cover" />
+          <p>{{currentBook.text}}</p>
+          <div class="controls">
+            <span>{{currentBook.purchasePrice}}</span>
+            <button *ngIf="!isSubscribed" (click)="onSubscribeClick(currentBook.name)">Subscribe!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ngx-spinner></ngx-spinner>
+</div>
