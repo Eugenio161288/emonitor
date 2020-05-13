@@ -8,4 +8,4 @@
 
 ## Architecture overview
 [back to the contents](#table-of-contents)
-![Architecture Overview](./docs/architecture-overview.svg)
+![Architecture Overview](./docs/books-online-architecture.svg)
