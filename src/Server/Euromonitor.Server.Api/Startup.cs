@@ -1,4 +1,5 @@
-﻿using Euromonitor.Server.Interfaces.Database;
+﻿using Euromonitor.Server.Api.Middleware;
+using Euromonitor.Server.Interfaces.Database;
 using Euromonitor.Server.MongoDbProvider;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -58,10 +59,6 @@ namespace Euromonitor.Server.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/error");
-            }
 
             app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
@@ -70,6 +67,7 @@ namespace Euromonitor.Server.Api
             app.UseOpenApi();
             app.UseSwaggerUi3();
 
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseMvc();
         }
     }
