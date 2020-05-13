@@ -1,4 +1,4 @@
-﻿using Euromonitor.Server.IdentityServer.Extensions;
+using Euromonitor.Server.IdentityServer.Extensions;
 using Euromonitor.Server.IdentityServer.Infrastructure.Data.Identity;
 using Euromonitor.Server.IdentityServer.Infrastructure.Services;
 using IdentityServer4.Services;
@@ -46,23 +46,13 @@ namespace Euromonitor.Server.IdentityServer
                     options.ConfigureDbContext = builder => builder.UseSqlServer(Configuration.GetConnectionString("Default"));
                     // this enables automatic token cleanup. this is optional.
                     options.EnableTokenCleanup = true;
-                    options.TokenCleanupInterval = 30; // interval in seconds
+                    options.TokenCleanupInterval = 30;
                 })
                 //.AddInMemoryPersistedGrants()
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryClients(Config.GetClients())
                 .AddAspNetIdentity<AppUser>();
-
-            /* We'll play with this down the road... 
-                services.AddAuthentication()
-                .AddGoogle("Google", options =>
-                {
-                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-
-                    options.ClientId = "<insert here>";
-                    options.ClientSecret = "<insert here>";
-                });*/
 
             services.AddTransient<IProfileService, IdentityClaimsProfileService>();
 
@@ -103,7 +93,7 @@ namespace Euromonitor.Server.IdentityServer
             var serilog = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
                 .Enrich.FromLogContext()
-                .WriteTo.File(@"authserver_log.txt");
+                .WriteTo.File(@"identityserver_log.txt");
 
             loggerFactory.WithFilter(new FilterLoggerSettings
                 {
