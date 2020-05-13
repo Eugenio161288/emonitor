@@ -28,9 +28,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: npm install and npm run build
-      with:
-        path: ~/src/Client
       run: |
         npm i
         npm run build
+      working-directory: src/Client
             
