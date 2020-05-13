@@ -31,4 +31,5 @@ jobs:
       run: |
         npm i
         npm run build
+      working-directory: src/Client
             
