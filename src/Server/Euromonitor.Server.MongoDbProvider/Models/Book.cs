@@ -1,9 +1,10 @@
-﻿using Euromonitor.Server.Interfaces.Entities;
+using Euromonitor.Server.Interfaces.Entities;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
+using System.Collections.Generic;
 
-namespace Euromonitor.Server.Api.Models.Data
+namespace Euromonitor.Server.MongoDbProvider.Models
 {
     /// <summary>
     /// Represents book with name, text, purchace price etc.
@@ -27,7 +28,7 @@ namespace Euromonitor.Server.Api.Models.Data
         /// Purchase price of the book.
         /// </summary>
         [BsonElement("purchasePrice")]
-        public Decimal PurchasePrice { get; set; }
+        public decimal PurchasePrice { get; set; }
 
         /// <summary>
         /// URL to the book's cover.
@@ -58,7 +59,7 @@ namespace Euromonitor.Server.Api.Models.Data
         /// <returns></returns>
         public override int GetHashCode()
         {
-            return HashCode.Combine(Isbn);
+            return 2140778025 + EqualityComparer<string>.Default.GetHashCode(Isbn);
         }
     }
 }

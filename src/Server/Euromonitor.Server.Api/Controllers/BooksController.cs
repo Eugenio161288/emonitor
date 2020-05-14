@@ -1,6 +1,6 @@
-﻿using Euromonitor.Server.Api.Models.Configuration;
-using Euromonitor.Server.Api.Models.Data;
+using Euromonitor.Server.Api.Models.Configuration;
 using Euromonitor.Server.Interfaces.Database;
+using Euromonitor.Server.MongoDbProvider.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;

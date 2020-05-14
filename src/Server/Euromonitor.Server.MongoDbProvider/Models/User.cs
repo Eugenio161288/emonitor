@@ -1,8 +1,8 @@
-﻿using Euromonitor.Server.Interfaces.Entities;
+using Euromonitor.Server.Interfaces.Entities;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 
-namespace Euromonitor.Server.Api.Models.Data
+namespace Euromonitor.Server.MongoDbProvider.Models
 {
     /// <summary>
     /// Represents user's properties like first name, last name, books etc.

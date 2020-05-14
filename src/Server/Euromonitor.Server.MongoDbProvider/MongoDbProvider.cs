@@ -1,4 +1,4 @@
-﻿using Euromonitor.Server.Interfaces.Database;
+using Euromonitor.Server.Interfaces.Database;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Collections.Generic;
