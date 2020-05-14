@@ -26,3 +26,5 @@
 /src/Server/tests/Euromonitor.Server.MongoDbProvider.Tests/obj
 /src/Server/Euromonitor.Server.Interfaces/bin/Release/netstandard2.0
 /src/Server/Euromonitor.Server.MongoDbProvider/bin/Release/netstandard2.0
+/src/Server/tests/Euromonitor.Server.MongoDbProvider.IntegrationTests/bin/Debug/netcoreapp3.1
+/src/Server/tests/Euromonitor.Server.MongoDbProvider.IntegrationTests/obj
