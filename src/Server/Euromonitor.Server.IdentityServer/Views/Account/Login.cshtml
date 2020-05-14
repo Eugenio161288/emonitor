@@ -1,4 +1,4 @@
-﻿@model LoginViewModel
+@model LoginViewModel
 
 <div class="row">
 
@@ -11,7 +11,7 @@
             <form asp-route="Login">
                 <input type="hidden" asp-for="ReturnUrl" />
                 <div class="form-group">
-                    <label asp-for="Username"></label>
+                    <label asp-for="Username">Email</label>
                     <input class="form-control" placeholder="Username" asp-for="Username" autofocus>
                 </div>
 
