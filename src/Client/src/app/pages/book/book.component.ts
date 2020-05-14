@@ -37,16 +37,16 @@ export class BookComponent implements OnInit {
       result => {
         const books = result;
         // @ts-ignore
-        this.isSubscribed = !!books.find((book) => book.name === this.currentBook.name);
+        this.isSubscribed = books && !!books.find((book) => book.name === this.currentBook.name);
         console.log('this.isSubscribed', this.isSubscribed);
       });
   }
 
-  public onSubscribeClick(name): void {
+  public onSubscribeClick(isbn: string): void {
     this.busy = true;
     this.spinner.show();
 
-    this.booksService.subscribeBook(this.authService.authorizationHeaderValue, name)
+    this.booksService.subscribeBook(this.authService.authorizationHeaderValue, isbn)
       .pipe(finalize(() => {
         this.spinner.hide();
         this.busy = false;

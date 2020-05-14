@@ -13,9 +13,9 @@ import { ConfigService } from '../../shared/config.service';
 export class AuthService extends BaseService {
 
   // Observable navItem source
-  private _authNavStatusSource = new BehaviorSubject<boolean>(false);
+  private authNavStatusSource = new BehaviorSubject<boolean>(false);
   // Observable navItem stream
-  authNavStatus$ = this._authNavStatusSource.asObservable();
+  authNavStatus$ = this.authNavStatusSource.asObservable();
 
   private manager = new UserManager(getClientSettings());
   private user: User | null;
@@ -25,36 +25,36 @@ export class AuthService extends BaseService {
 
     this.manager.getUser().then(user => {
       this.user = user;
-      this._authNavStatusSource.next(this.isAuthenticated());
+      this.authNavStatusSource.next(this.isAuthenticated());
     });
   }
 
-  login() {
+  public login() {
     return this.manager.signinRedirect();
   }
 
-  async completeAuthentication() {
+  public async completeAuthentication() {
     this.user = await this.manager.signinRedirectCallback();
-    this._authNavStatusSource.next(this.isAuthenticated());
+    this.authNavStatusSource.next(this.isAuthenticated());
   }
 
-  register(userRegistration: any) {
+  public register(userRegistration: any) {
     return this.http.post(this.configService.authApiURI + '/account', userRegistration).pipe(catchError(this.handleError));
   }
 
-  isAuthenticated(): boolean {
+  public isAuthenticated(): boolean {
     return this.user != null && !this.user.expired;
   }
 
-  get authorizationHeaderValue(): string {
+  public get authorizationHeaderValue(): string {
     return `${this.user.token_type} ${this.user.access_token}`;
   }
 
-  get name(): string {
+  public get name(): string {
     return this.user != null ? this.user.profile.name : '';
   }
 
-  async signout() {
+  public async signout() {
     await this.manager.signoutRedirect();
   }
 }

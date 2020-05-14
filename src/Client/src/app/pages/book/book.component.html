@@ -8,7 +8,7 @@
           <p>{{currentBook.text}}</p>
           <div class="controls">
             <span>{{currentBook.purchasePrice}}</span>
-            <button *ngIf="!isSubscribed" (click)="onSubscribeClick(currentBook.name)">Subscribe!</button>
+            <button *ngIf="!isSubscribed" (click)="onSubscribeClick(currentBook.isbn)">Subscribe!</button>
           </div>
         </div>
       </div>

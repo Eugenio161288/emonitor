@@ -42,10 +42,10 @@ export class BooksService extends BaseService {
       })
     };
 
-    return this.http.get(this.configService.resourceApiURI + '/subscription/books', httpOptions).pipe(catchError(this.handleError));
+    return this.http.get(this.configService.resourceApiURI + '/subscription/UserBooks', httpOptions).pipe(catchError(this.handleError));
   }
 
-  subscribeBook(token: string, name: string) {
+  subscribeBook(token: string, isbn: string) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ export class BooksService extends BaseService {
     };
 
     const body = {
-      name,
+      isbn,
     };
 
     return this.http.post(
@@ -64,14 +64,14 @@ export class BooksService extends BaseService {
     ).pipe(catchError(this.handleError));
   }
 
-  deleteSubscription(token: string, name: string) {
+  deleteSubscription(token: string, isbn: string) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: token
       }),
       body: {
-        name,
+        isbn,
       },
     };
 

@@ -11,8 +11,8 @@ import { BooksService } from './services/books.service';
   styleUrls: ['./books.component.scss']
 })
 export class BooksComponent implements OnInit {
-  claims = null;
-  busy: boolean;
+  public claims = null;
+  public busy: boolean;
   public pagetitle = '';
   public pageType = '';
   private fetchMethod = '';
@@ -52,14 +52,14 @@ export class BooksComponent implements OnInit {
       });
   }
 
-  public onUnsubscribeClick(name): void {
-    this.booksService.deleteSubscription(this.authService.authorizationHeaderValue, name)
+  public onUnsubscribeClick(isbn: string): void {
+    this.booksService.deleteSubscription(this.authService.authorizationHeaderValue, isbn)
       .pipe(finalize(() => {
         this.spinner.hide();
         this.busy = false;
       })).subscribe(
       result => {
-        this.claims = this.claims.filter((book) => book.name !== name);
+        this.claims = this.claims.filter((book) => book.isbn !== isbn);
         console.log('success');
       });
   }

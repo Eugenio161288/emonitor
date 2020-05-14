@@ -11,13 +11,16 @@ import { TopSecretService } from './services/top-secret.service';
   styleUrls: ['./top-secret.component.scss']
 })
 export class TopSecretComponent implements OnInit {
-  claims = null;
-  busy: boolean;
+  public claims = null;
+  public busy: boolean;
 
-  constructor(private authService: AuthService, private topSecretService: TopSecretService, private spinner: NgxSpinnerService) {
-  }
+  constructor(
+    private authService: AuthService,
+    private topSecretService: TopSecretService,
+    private spinner: NgxSpinnerService,
+  ) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.busy = true;
     this.spinner.show();
     this.topSecretService.fetchTopSecretData(this.authService.authorizationHeaderValue)

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { finalize } from 'rxjs/operators'
+import { finalize } from 'rxjs/operators';
+
 import { AuthService } from '../../core/authentication/auth.service';
 import { UserRegistration } from '../../shared/models/user.registration';
 
@@ -9,18 +10,16 @@ import { UserRegistration } from '../../shared/models/user.registration';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
-  success: boolean;
-  error: string;
-  userRegistration: UserRegistration = {name: '', email: '', password: ''};
-  submitted = false;
+  public success: boolean;
+  public error: string;
+  public userRegistration: UserRegistration = {name: '', email: '', password: ''};
+  public submitted = false;
 
   constructor(private authService: AuthService, private spinner: NgxSpinnerService) {}
 
-  ngOnInit() {}
-
-  onSubmit() {
+  public onSubmit() {
     this.spinner.show();
 
     this.authService.register(this.userRegistration)
