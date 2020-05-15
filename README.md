@@ -43,7 +43,18 @@ Backend applications were implemented using [.Net Core 3.1](https://dotnet.micro
 ## Local development
 [back to the contents](#table-of-contents)
 
-For local development the `euro_monitor_db_dev` was provisioned on [mLab](Local development)
+For local development the `euro_monitor_db_dev` MongoDb DB was provisioned on [mLab](https://mlab.com/), please use it for local development.
+
+Please follow [Client](#client-application) instructions to configure client for local development.
+
+1. ```src/Server> dotnet build```
+2. ```src/Server/Euromonitor.Server.IdentityServer.Infrastructure> dotnet ef database update --context AppIdentityDbContext```
+3. ```src/Server/Euromonitor.Server.IndetityServer.Infrastucture> dotnet ef database update --context PersistedGrantDbContext```
+4. ```src/Server> dotnet build```
+5. ```src/Server> dotnet run Euromonitor.Server.IdentityServer```
+6. ```src/Server> dotnet run Euromonitor.Server.Api```
+7. ```src/Client> npm install```
+8. ```src/Client> ng serve```
 
 
 ## Continuous Integration
