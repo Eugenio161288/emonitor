@@ -1,6 +1,7 @@
 using Euromonitor.Server.Api.Models.Configuration;
 using Euromonitor.Server.Interfaces.Database;
 using Euromonitor.Server.MongoDbProvider.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace Euromonitor.Server.Api.Controllers
     /// <summary>
     /// Determines REST API methods for books.
     /// </summary>
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BooksController : ControllerBase

@@ -2,6 +2,7 @@ using Euromonitor.Server.Api.Models;
 using Euromonitor.Server.Api.Models.Configuration;
 using Euromonitor.Server.Interfaces.Database;
 using Euromonitor.Server.MongoDbProvider.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace Euromonitor.Server.Api.Controllers
     /// <summary>
     /// Determines REST API for user subscriptions.
     /// </summary>
+    [Authorize]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class SubscriptionController : ControllerBase
