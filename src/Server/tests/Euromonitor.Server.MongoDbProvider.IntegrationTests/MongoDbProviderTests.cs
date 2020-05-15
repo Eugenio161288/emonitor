@@ -103,6 +103,37 @@ namespace Euromonitor.Server.MongoDbProvider.IntegrationTests
             collection.DeleteOne(filter);
         }
 
+        [Fact]
+        public async Task FindRecordAsync_ExistingRecord_FindsExistingRecord()
+        {
+            var dbUser = new BsonDocument
+            {
+                { "givenname", "adminuser" },
+                { "firstName", "Super" },
+                { "lastName", "User" },
+                { "email", "admin@gmail.com" }
+            };
+
+            var db = _client.GetDatabase("euro_monitor_db_dev");
+            var filter = Builders<BsonDocument>.Filter.Eq("givenname", "adminuser");
+            var collection = db.GetCollection<BsonDocument>("users_test");
+            _dbProvider.Collection = "users_test";
+            // no user in db
+            var apiUser = await collection.Find(filter).FirstOrDefaultAsync();
+            var providerUser = await _dbProvider.FindRecordAsync<User>("givenname", "adminuser");
+            Assert.Null(apiUser);
+            Assert.Null(providerUser);
+
+            await collection.InsertOneAsync(dbUser);
+
+            apiUser = await collection.Find(filter).FirstOrDefaultAsync();
+            providerUser = await _dbProvider.FindRecordAsync<User>("givenname", "adminuser");
+            Assert.NotNull(apiUser);
+            Assert.NotNull(providerUser);
+
+            collection.DeleteOne(filter);
+        }
+
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 
@@ -112,7 +143,6 @@ namespace Euromonitor.Server.MongoDbProvider.IntegrationTests
             {
                 if (disposing)
                 {
-                    //users.Clear();
                     // TODO: dispose managed state (managed objects).
                 }
 
