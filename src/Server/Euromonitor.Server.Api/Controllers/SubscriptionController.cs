@@ -43,7 +43,7 @@ namespace Euromonitor.Server.Api.Controllers
                                 .Build();
 
             var givenName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName);
-            var user = await dbProvider.FindRecord<User>("givenname", givenName.Value);
+            var user = await dbProvider.FindRecordAsync<User>("givenname", givenName.Value);
             if (user != null && user.Books.Any())
             {
                 result = user.Books;
@@ -65,11 +65,11 @@ namespace Euromonitor.Server.Api.Controllers
                                 .SetDatabase(_dbConfiguration.Database)
                                 .SetCollection(_dbConfiguration.BooksCollection)
                                 .Build();
-            var book = await dbProvider.FindRecord<Book>("isbn", model.Isbn);
+            var book = await dbProvider.FindRecordAsync<Book>("isbn", model.Isbn);
 
             dbProvider.Collection = _dbConfiguration.UsersCollection;
             var givenName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName);
-            var user = await dbProvider.FindRecord<User>("givenname", givenName.Value);
+            var user = await dbProvider.FindRecordAsync<User>("givenname", givenName.Value);
 
             if (user == null)
             {
@@ -102,11 +102,11 @@ namespace Euromonitor.Server.Api.Controllers
                                 .SetDatabase(_dbConfiguration.Database)
                                 .SetCollection(_dbConfiguration.BooksCollection)
                                 .Build();
-            var book = await dbProvider.FindRecord<Book>("isbn", model.Isbn);
+            var book = await dbProvider.FindRecordAsync<Book>("isbn", model.Isbn);
 
             dbProvider.Collection = _dbConfiguration.UsersCollection;
             var givenName = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName);
-            var user = await dbProvider.FindRecord<User>("givenname", givenName.Value);
+            var user = await dbProvider.FindRecordAsync<User>("givenname", givenName.Value);
 
             if(user != null && book != null)
             {

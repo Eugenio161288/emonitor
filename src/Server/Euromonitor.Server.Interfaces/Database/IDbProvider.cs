@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Euromonitor.Server.Interfaces.Database
@@ -47,12 +47,12 @@ namespace Euromonitor.Server.Interfaces.Database
         Task<List<T>> ShowAll<T>();
 
         /// <summary>
-        /// Finds record based on passed key and value.
+        /// Finds record based on passed key and value asynchronously.
         /// </summary>
         /// <typeparam name="T">Type of the record.</typeparam>
         /// <param name="key">The key to be used in search filter as record field.</param>
         /// <param name="value">The value to be used in search filter as field's value.</param>
         /// <returns>Returns record based on passed key and value.</returns>
-        Task<T> FindRecord<T>(string key, string value);
+        Task<T> FindRecordAsync<T>(string key, string value);
     }
 }

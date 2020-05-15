@@ -85,13 +85,13 @@ namespace Euromonitor.Server.MongoDbProvider
         }
 
         /// <summary>
-        /// Finds docment based on passed key and value.
+        /// Finds docment based on passed key and value asynchronously.
         /// </summary>
         /// <typeparam name="T">The type of the document.</typeparam>
         /// <param name="key">The key to be used in search filter as document field.</param>
         /// <param name="value">The value to be used in search filter as field's value.</param>
         /// <returns>Returns document based on passed key and value.</returns>
-        public async Task<T> FindRecord<T>(string key, string value)
+        public async Task<T> FindRecordAsync<T>(string key, string value)
         {
             var filter = Builders<T>.Filter.Eq(key, value);
             var collection = _db.GetCollection<T>(Collection);
