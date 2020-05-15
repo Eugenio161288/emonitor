@@ -11,6 +11,7 @@
  - [Continuous Integration](#continuous-integration)
  - [Swagger](#swagger)
  - [Deployment architecture](#deployment-architecture)
+ - [Notes and assumptions](#notes-and-assumptions)
 
 ## Architecture overview
 [back to the contents](#table-of-contents)
@@ -27,6 +28,8 @@ Main components:
 **API DB**: DB that stores data for API functionality. The Document DB (MongoDB) is used here.
 
 **Client**: Single Page Application that may be used to register/login and invoke API functionality
+
+Users may login/register via client application on browser. 3rd party resellers should be registered in system before using API endpoints
 
 ## Client application
 [back to the contents](#table-of-contents)
@@ -56,6 +59,7 @@ Please follow [Client](#client-application) instructions to configure client for
 7. ```src/Client> npm install```
 8. ```src/Client> ng serve```
 
+**IdentityServer** runs under 5000 port, **API Server** runs under 5050 port, **SPA Client** runs under 4200 port
 
 ## Continuous Integration
 [back to the contents](#table-of-contents)
@@ -73,3 +77,15 @@ The **Github Actions** are used for CI in this repository. There are 2 jobs: [Bu
 
 This picture shows an example of the deployed solution. Please use [link](https://erspaproxy.azurewebsites.net) to try solution. 
 [API Swagger link](https://erbooksonlineapi.azurewebsites.net/swagger) link for Swagger/OpenAPI specification of the hosted API.
+
+## Notes and assumptions
+[back to the contents](#table-of-contents)
+
+- Registration and authorizarion functionality are implemented for demo purposes and contain main idea only. **Multi factor authentication (MFA), password confirmation, duplicated password, Facebook/Google accounts etc. aren't implemented in this solution**
+- Solution structure. To make it easier to take a look in all components I put all projects in one repository. For real project client, identity server and API server may be stored in different repositories, because they may be supported by different teams and they are deploed separately
+- Connection strings. To make it easier for you run solution with real DBs (including test MongoDB instance in cloud) I put connection string for test/develop instnces in source code. Hosted [example](https://erspaproxy.azurewebsites.net/) I provided above uses another DB instances. For real projects I use [Key Vault](https://azure.microsoft.com/en-us/services/key-vault/) or [Vault](https://aws.amazon.com/quickstart/architecture/vault/)/[AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) depending on cloud provider
+- Continuous Integration. **Github actions** is configured for CI in the repository for Demo purpose (and to try it out, because on real projects didn't have a chance using this yet)
+- MongoDB for API DB. Document DB is used here for demo purposes only. It's possible to implement this technical assessment in different ways, I've choosed NoSQL DB because this task has quite simple data structure, so this example shows that Identity Server and API Server may have own DBs and ever different types of the DBS
+- In-memory clients and API and identity resources. To make it easier quickly adding/removing clients or resources for Identity Server, they are stored in memory. Because the application shoud be restarted on production after each editing, in real project I'd use DB for this data too.
+- Docker containers. I didn't use docker containers for this task
+- SQL Server DB. The SQL Server is used here as an example. For real project with familiar data structure I'd look to **MySQL** db too before implementing
